@@ -11,16 +11,17 @@ public class kugel {
 	private double speed;
 	private Color c;
 	private double masse;
-	private double rest;
+	private double epsilon;
 
-	public kugel(double xPosition, double yPosition, double Radius, double Speed, Color Farbe, double Resti) {
+	public kugel(double xPosition, double yPosition, double Radius, double Speed, Color Farbe, double Epsilon,
+			double Masse) {
 		x = xPosition;
 		y = yPosition;
 		radius = Radius;
 		speed = Speed;
 		c = Farbe;
-		masse = ((4 / 3) * (this.getRadius() * this.getRadius() * this.getRadius()) * Math.PI);
-		rest = Resti;
+		masse = Masse;
+		epsilon = Epsilon;
 	}
 
 	public double getMasse() {
@@ -63,6 +64,14 @@ public class kugel {
 		this.c = c;
 	}
 
+	public double getEpsilon() {
+		return epsilon;
+	}
+
+	public void setEpsilon(double epsilon) {
+		this.epsilon = epsilon;
+	}
+
 	public double getSpeed() {
 		return speed;
 	}
@@ -73,44 +82,45 @@ public class kugel {
 
 	public void move() {
 
-		if (this.x <= 0) {
-			this.x = 0;
+		if (Math.round(this.getX() - this.getRadius()) <= (konstanten.WINDOW_WIDTH - konstanten.WINDOW_WIDTH)) {
 
-			this.speed *= -Math.round(this.getRest());
+			this.speed = ((this.getMasse() * this.getSpeed()) + 2147483647 * 0
+					+ ((this.getEpsilon() * 2147483647) * (0 - this.getSpeed()))) / (this.getMasse() + 2147483647);
+			System.out.println("Geschwindigkeit der Kugel " + this.getC() + " bei x("
+					+ (konstanten.WINDOW_WIDTH - konstanten.WINDOW_WIDTH) + "): " + this.speed + "px/s");
 
-		} else if ((this.x >= konstanten.WINDOW_WIDTH - (2 * this.radius))) {
+		} else if (Math.round(this.getX() + this.getRadius()) >= (konstanten.WINDOW_WIDTH)) {
 
-			this.speed *= -Math.round(this.getRest());
+			this.speed = ((this.getMasse() * this.getSpeed()) + 2147483647 * 0
+					+ ((this.getEpsilon() * 2147483647) * (0 - this.getSpeed()))) / (this.getMasse() + 2147483647);
+			System.out.println("Geschwindigkeit der Kugel " + this.getC() + " bei x(" + konstanten.WINDOW_WIDTH + "): "
+					+ this.speed + "px/s");
 		}
 	}
 
 	public void zeichne(Graphics g) {
 		this.move();
-		x = Math.round(this.getX()) + Math.round(this.getSpeed());
+		x = this.x + this.speed;
 		g.setColor(c);
-		g.fillOval((int) Math.round(x), (int) (Math.round(y)), (int) Math.round(radius) * 2,
-				(int) Math.round(radius) * 2);
+		Math.round(this.x);
+		g.fillOval((int) (this.getX() - this.getRadius()), (int) (this.getY() - this.getRadius()),
+				(int) this.getRadius() * 2, (int) this.getRadius() * 2);
 
-	}
-
-	public double getRest() {
-		return rest;
-	}
-
-	public void setRest(double rest) {
-		this.rest = rest;
 	}
 
 	public void zeichneSchwerpunkt(Graphics g, kugel b) {
 		g.setColor(Color.BLACK);
-		g.fillOval((int) (((this.x * this.radius) + ((b.getX() * b.getRadius()))) / (this.radius + b.getRadius())), 295,
-				10, 10);
+		Math.round(this.x);
+		Math.round(b.getX());
+		g.fillOval((int) (((this.getX() * this.getMasse()) + ((b.getX() * b.getMasse())))
+				/ (this.getMasse() + b.getMasse())), 295, 10, 10);
 	}
 
 	public boolean collides(kugel o) {
 
 		boolean collision = false;
-		if (Math.sqrt((o.getX() - this.x) * (o.getX() - this.x)) <= (this.radius + o.getRadius())) {
+		if (Math.sqrt(
+				((o.getX()) - (this.getX())) * ((o.getX()) - (this.getX()))) <= (this.getRadius() + o.getRadius())) {
 			collision = true;
 		}
 

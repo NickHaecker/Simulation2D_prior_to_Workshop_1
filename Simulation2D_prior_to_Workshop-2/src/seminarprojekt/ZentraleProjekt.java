@@ -38,13 +38,13 @@ public class ZentraleProjekt extends JFrame {
 
 	}
 
-	double rest = 0.8;
+	double epsilon = 1;
 
-	kugel eins = new kugel(700, 265, 35, 3, Color.YELLOW, rest);
-	kugel zwei = new kugel(400, 275, 25, 1, Color.RED, rest);
-	kugel drei = new kugel(100, 270, 30, -2, Color.WHITE, rest);
+	kugel eins = new kugel(750, 300, 35, 1, Color.YELLOW, epsilon, 10);
+	kugel zwei = new kugel(400, 300, 25, -1, Color.RED, epsilon, 3);
+	kugel drei = new kugel(50, 300, 30, 1, Color.WHITE, epsilon, 5);
 
-	bodenschiene boden = new bodenschiene(1, 300, 800, 300, Color.GREEN);
+	bodenschiene boden = new bodenschiene(1, 300, konstanten.WINDOW_WIDTH, 300, Color.GREEN);
 
 	void draw(double absT) {
 
@@ -69,36 +69,42 @@ public class ZentraleProjekt extends JFrame {
 			if (drei.getSpeed() >= 0 && zwei.getSpeed() >= 0) {
 
 				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						+ ((rest * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						- ((rest * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getMasse())))
 						/ (drei.getMasse() + zwei.getMasse());
-				drei.setSpeed(Math.round(v1));
-				zwei.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit weiße Kugel : " + v1 + "px/s");
+				drei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit rote Kugel : " + v2 + "px/s");
+				zwei.setSpeed(v2);
 
 			} else if (drei.getSpeed() >= 0 && zwei.getSpeed() <= 0) {
 
 				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						+ ((rest * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						- ((rest * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 
-				drei.setSpeed(Math.round(v1));
-				zwei.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit weiße Kugel : " + v1 + "px/s");
+				drei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit rote Kugel : " + v2 + "px/s");
+				zwei.setSpeed(v2);
 			} else {
 
 				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						+ ((rest * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getMasse())))
 						/ (drei.getMasse() + zwei.getMasse());
 				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						- ((rest * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
+						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 
-				drei.setSpeed(Math.round(v1));
-				zwei.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit weiße Kugel : " + v1 + "px/s");
+				drei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit rote Kugel : " + v2 + "px/s");
+				zwei.setSpeed(v2);
 			}
 		}
 
@@ -106,36 +112,42 @@ public class ZentraleProjekt extends JFrame {
 			if (zwei.getSpeed() >= 0 && eins.getSpeed() >= 0) {
 
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						+ ((rest * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 				v2 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						- ((rest * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						- ((epsilon * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 
-				zwei.setSpeed(Math.round(v1));
-				eins.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit rote Kugel : " + v1 + "px/s");
+				zwei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit gelbe Kugel : " + v2 + "px/s");
+				eins.setSpeed(v2);
 			} else if (zwei.getSpeed() >= 0 && eins.getSpeed() <= 0) {
 
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						+ ((rest * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 				v2 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						- ((rest * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						- ((epsilon * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 
-				zwei.setSpeed(Math.round(v1));
-				eins.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit rote Kugel: " + v1 + "px/s");
+				zwei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit gelbe Kugel: " + v2 + "px/s");
+				eins.setSpeed(v2);
 			} else {
 
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						+ ((rest * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 				v2 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
-						- ((rest * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
+						- ((epsilon * zwei.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
 
-				zwei.setSpeed(Math.round(v1));
-				eins.setSpeed(Math.round(v2));
+				System.out.println("Geschwinidgkeit rote Kugel : " + v1 + "px/s");
+				zwei.setSpeed(v1);
+				System.out.println("Geschwinidgkeit gelbe Kugel: " + v2 + "px/s");
+				eins.setSpeed(v2);
 			}
 		}
 
