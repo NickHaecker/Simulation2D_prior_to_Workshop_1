@@ -40,9 +40,9 @@ public class ZentraleProjekt extends JFrame {
 
 	double epsilon = 1;
 
-	kugel eins = new kugel(750, 300, 35, 1, Color.YELLOW, epsilon, 10);
-	kugel zwei = new kugel(400, 300, 25, -1, Color.RED, epsilon, 3);
-	kugel drei = new kugel(50, 300, 30, 1, Color.WHITE, epsilon, 5);
+	kugel eins = new kugel(750, 300, 35, 2, Color.YELLOW, epsilon, 5);
+	kugel zwei = new kugel(400, 300, 25, -1, Color.RED, epsilon, 2);
+	kugel drei = new kugel(50, 300, 30, 1, Color.WHITE, epsilon, 3);
 
 	bodenschiene boden = new bodenschiene(1, 300, konstanten.WINDOW_WIDTH, 300, Color.GREEN);
 
@@ -68,11 +68,12 @@ public class ZentraleProjekt extends JFrame {
 		if (drei.collides(zwei)) {
 			if (drei.getSpeed() >= 0 && zwei.getSpeed() >= 0) {
 
-				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
+				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
-				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getMasse())))
+
+				v2 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
+						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 				System.out.println("Geschwinidgkeit weiße Kugel : " + v1 + "px/s");
 				drei.setSpeed(v1);
@@ -81,10 +82,10 @@ public class ZentraleProjekt extends JFrame {
 
 			} else if (drei.getSpeed() >= 0 && zwei.getSpeed() <= 0) {
 
-				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
+				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
-				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
+				v2 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 
@@ -94,10 +95,10 @@ public class ZentraleProjekt extends JFrame {
 				zwei.setSpeed(v2);
 			} else {
 
-				v1 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
-						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getMasse())))
+				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
+						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
-				v2 = ((drei.getMasse() * drei.getSpeed()) + zwei.getMasse() * zwei.getSpeed()
+				v2 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						- ((epsilon * drei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
 
