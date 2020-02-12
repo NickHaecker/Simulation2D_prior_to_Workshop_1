@@ -51,22 +51,25 @@ public class ZentraleProjekt extends JFrame {
 		Graphics g = getGraphics();
 		Graphics bbg = backBuffer.getGraphics();
 
-		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, konstanten.WINDOW_WIDTH, konstanten.WINDOW_HEIGHT);
+		bbg.setColor(Color.GRAY);
+		bbg.fillRect(0, 0, konstanten.WINDOW_WIDTH, konstanten.WINDOW_HEIGHT);
 
-		boden.zeichnebodenschiene(g);
+		boden.zeichnebodenschiene(bbg);
 
-		eins.zeichne(g);
-		zwei.zeichne(g);
-		drei.zeichne(g);
-		eins.zeichneSchwerpunkt(g, zwei);
+		eins.zeichne(bbg);
+		zwei.zeichne(bbg);
+		drei.zeichne(bbg);
+		eins.zeichneSchwerpunkt(bbg, zwei);
 
-		drei.zeichneSchwerpunkt(g, zwei);
+		drei.zeichneSchwerpunkt(bbg, zwei);
 
 		double v1, v2;
 
 		if (drei.collides(zwei)) {
 			if (drei.getSpeed() >= 0 && zwei.getSpeed() >= 0) {
+
+				drei.setX(drei.getX() - 1);
+				zwei.setX(zwei.getX() + 1);
 
 				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
@@ -82,6 +85,9 @@ public class ZentraleProjekt extends JFrame {
 
 			} else if (drei.getSpeed() >= 0 && zwei.getSpeed() <= 0) {
 
+				drei.setX(drei.getX() - 1);
+				zwei.setX(zwei.getX() + 1);
+
 				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
 						/ (drei.getMasse() + zwei.getMasse());
@@ -94,6 +100,9 @@ public class ZentraleProjekt extends JFrame {
 				System.out.println("Geschwinidgkeit rote Kugel : " + v2 + "px/s");
 				zwei.setSpeed(v2);
 			} else {
+
+				drei.setX(drei.getX() - 1);
+				zwei.setX(zwei.getX() + 1);
 
 				v1 = ((drei.getMasse() * drei.getSpeed()) + (zwei.getMasse() * zwei.getSpeed())
 						+ ((epsilon * zwei.getMasse()) * (zwei.getSpeed() - drei.getSpeed())))
@@ -112,6 +121,9 @@ public class ZentraleProjekt extends JFrame {
 		else if (zwei.collides(eins)) {
 			if (zwei.getSpeed() >= 0 && eins.getSpeed() >= 0) {
 
+				zwei.setX(zwei.getX() - 1);
+				eins.setX(eins.getX() + 1);
+
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
 						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
@@ -125,6 +137,9 @@ public class ZentraleProjekt extends JFrame {
 				eins.setSpeed(v2);
 			} else if (zwei.getSpeed() >= 0 && eins.getSpeed() <= 0) {
 
+				zwei.setX(zwei.getX() - 1);
+				eins.setX(eins.getX() + 1);
+
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
 						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
 						/ (zwei.getMasse() + eins.getMasse());
@@ -137,6 +152,9 @@ public class ZentraleProjekt extends JFrame {
 				System.out.println("Geschwinidgkeit gelbe Kugel: " + v2 + "px/s");
 				eins.setSpeed(v2);
 			} else {
+
+				zwei.setX(zwei.getX() - 1);
+				eins.setX(eins.getX() + 1);
 
 				v1 = ((zwei.getMasse() * zwei.getSpeed()) + (eins.getMasse() * eins.getSpeed())
 						+ ((epsilon * eins.getMasse()) * (eins.getSpeed() - zwei.getSpeed())))
@@ -152,6 +170,6 @@ public class ZentraleProjekt extends JFrame {
 			}
 		}
 
-		bbg.drawImage(backBuffer, 0, 0, null);
+		g.drawImage(backBuffer, 0, 0, null);
 	}
 }

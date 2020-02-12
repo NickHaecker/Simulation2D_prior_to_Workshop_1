@@ -82,17 +82,18 @@ public class kugel {
 
 	public void move() {
 
-		if (Math.round(this.getX() - this.getRadius()) <= (0)) {
+		if ((this.getX() - this.getRadius()) <= (0)) {
+			this.x += 1;
 
-			this.speed = ((this.getMasse() * this.getSpeed()) + (999999999 * 0)
-					+ ((this.epsilon * 999999999) * (0 - this.getSpeed()))) / (this.getMasse() + 999999999);
+			this.speed *= -1;
 			System.out.println("Geschwindigkeit der Kugel " + this.getC() + " bei x("
 					+ (konstanten.WINDOW_WIDTH - konstanten.WINDOW_WIDTH) + "): " + this.speed + "px/s");
 
-		} else if (Math.round(this.getX() + this.getRadius()) >= (konstanten.WINDOW_WIDTH)) {
+		} else if ((this.getX() + this.getRadius()) >= (konstanten.WINDOW_WIDTH)) {
 
-			this.speed = ((this.getMasse() * this.getSpeed()) + (999999999 * 0)
-					+ ((this.epsilon * 999999999) * (0 - this.getSpeed()))) / (this.getMasse() + 999999999);
+			this.x += -1;
+
+			this.speed *= -1;
 			System.out.println("Geschwindigkeit der Kugel " + this.getC() + " bei x(" + konstanten.WINDOW_WIDTH + "): "
 					+ this.speed + "px/s");
 		}
@@ -112,8 +113,8 @@ public class kugel {
 		g.setColor(Color.BLACK);
 		Math.round(this.x);
 		Math.round(b.getX());
-		g.fillOval((int) ((((this.getX() * this.getMasse()) + ((b.getX() * b.getMasse())))
-				/ (this.getMasse() + b.getMasse())) + 5), 295, 10, 10);
+		g.fillOval((int) ((((this.getX() - 5) * this.getMasse()) + (((b.getX() - 5) * b.getMasse())))
+				/ (this.getMasse() + b.getMasse())), 295, 10, 10);
 	}
 
 	public boolean collides(kugel o) {
